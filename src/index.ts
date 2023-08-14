@@ -9,7 +9,7 @@ process.on('unhandledRejection', (reason, promise) => {
   console.log(
     `App exiting due to an unhandled promise: ${promise} and reason: ${reason}`
   );
-  // lets throw the error and let the uncaughtException handle below handle it
+
   throw reason;
 });
 
@@ -25,6 +25,7 @@ process.on('uncaughtException', (error) => {
     server.start();
 
     const exitSignals: NodeJS.Signals[] = ['SIGINT', 'SIGTERM', 'SIGQUIT'];
+    //Desconmentar após conexão ao banco de dados
     /*for (const exitSignal of exitSignals) {
       process.on(exitSignal, async () => {
         try {
