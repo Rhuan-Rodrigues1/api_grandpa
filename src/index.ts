@@ -9,7 +9,7 @@ process.on('unhandledRejection', (reason, promise) => {
   console.log(
     `App exiting due to an unhandled promise: ${promise} and reason: ${reason}`
   );
-
+  
   throw reason;
 });
 
