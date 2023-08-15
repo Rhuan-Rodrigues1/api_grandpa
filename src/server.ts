@@ -1,8 +1,7 @@
-import './utils/module-alias'
 import express from "express";
 import morgan from "morgan";
 import cors from "cors";
-
+import * as database from "./database";
 
 export class SetupServer {
     private app = express()
@@ -12,6 +11,7 @@ export class SetupServer {
 
     public async init(): Promise<void> {
         this.setupExpress()
+        this.setupDatabase()
     }
     
     private setupExpress(): void {
@@ -20,6 +20,14 @@ export class SetupServer {
         this.app.use(cors({
             origin: '*'
         }))
+    }
+
+    private async setupDatabase(): Promise<void> {
+        await database.connect()
+    }
+
+    public async close(): Promise<void> {
+        await database.close()
     }
 
     public start(): void {
