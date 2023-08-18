@@ -2,6 +2,7 @@ import express from "express";
 import morgan from "morgan";
 import cors from "cors";
 import * as database from "./database";
+import { router } from "./routes";
 
 export class SetupServer {
     private app = express()
@@ -20,6 +21,7 @@ export class SetupServer {
         this.app.use(cors({
             origin: '*'
         }))
+        this.app.use(router)
     }
 
     private async setupDatabase(): Promise<void> {
