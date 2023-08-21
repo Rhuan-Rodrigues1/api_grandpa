@@ -1,11 +1,13 @@
 import express from "express";
 import morgan from "morgan";
 import cors from "cors";
-import * as database from "./database";
+import * as database from "./database/database";
 import { router } from "./routes";
 
 export class SetupServer {
     private app = express()
+
+
     constructor(private port: Number) {
         this.port = port
     }

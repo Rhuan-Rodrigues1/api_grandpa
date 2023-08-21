@@ -1,11 +1,21 @@
 
+interface userDatas {
+    name: String
+    surname: String 
+    email: String
+    password: String 
+    age: Number 
+    cpf: String
+    address: String 
+    isCareviger: Boolean    
+}
 
 export interface Iusers {
-    execute(name: String, surname: String, email: String, password: String, age: Number, cpf: String, address: String, isCareviger: Boolean): Promise<void>
+    execute({name, surname, email, password, age, cpf, address, isCareviger}: userDatas): Promise<void>
 }
 
 class UsersService implements Iusers {
-    public async execute(name: String, surname: String, email: String, password: String, age: Number, cpf: String, address: String, isCareviger: Boolean): Promise<void> {
+    public async execute({name, surname, email, password, age, cpf, address, isCareviger}: userDatas): Promise<void> {
   
 
     }
