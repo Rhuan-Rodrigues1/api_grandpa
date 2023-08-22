@@ -1,13 +1,13 @@
 
 interface userDatas {
-    name: String
-    surname: String 
-    email: String
-    password: String 
-    age: Number 
-    cpf: String
-    address: String 
-    isCareviger: Boolean    
+    name: string
+    surname: string 
+    email: string
+    password: string 
+    age: number 
+    cpf: string
+    address: string 
+    isCareviger: boolean    
 }
 
 export interface Iusers {
