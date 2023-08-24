@@ -1,3 +1,4 @@
+import { UserRepository } from "../repositories";
 
 interface userDatas {
     name: string
@@ -11,12 +12,28 @@ interface userDatas {
 }
 
 export interface Iusers {
-    execute({name, surname, email, password, age, cpf, address, isCareviger}: userDatas): Promise<void>
+    execute({name, surname, email, password, age, cpf, address, isCareviger}: userDatas): Promise<any>
 }
 
 class UsersService implements Iusers {
-    public async execute({name, surname, email, password, age, cpf, address, isCareviger}: userDatas): Promise<void> {
-  
+    private userRepository: UserRepository
+    constructor(userRepository: UserRepository){
+        this.userRepository = userRepository
+    }
+    public async execute({name, surname, email, password, age, cpf, address, isCareviger}: userDatas): Promise<any> {
 
+        const emailRegex = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
+        
+            if(!email) {
+                throw new Error("Email obrigatorio")
+            }
+
+            if(!emailRegex.test(email)) {
+                throw new Error("Email Invalido")
+            }
+
+            const user = await this.userRepository.create({name, surname, email, password, age, cpf, address, isCareviger})
+            
+            return user
     }
 }

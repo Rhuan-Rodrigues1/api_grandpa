@@ -1,4 +1,5 @@
 import { DefaultMongoDBRepository } from './defaultRepository';
+import mongoose from "mongoose";
 import { User } from '../models/users';
 import {  UserRepository } from './index';
 
@@ -35,4 +36,7 @@ export class UserMongoDBRepository
     return await this.deleteAll()
   }
 
+  async execute(): Promise<any> {
+    return await this.execute()
+  }
 }

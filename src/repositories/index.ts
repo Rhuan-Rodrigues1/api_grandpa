@@ -12,4 +12,5 @@ export interface BaseRepository<T> {
 export interface UserRepository extends BaseRepository<User> {
   findOneById(id: string): Promise<void>;
   findOneByEmail(email: string): Promise<void>;
+  execute():Promise<any>
 }

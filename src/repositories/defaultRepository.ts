@@ -6,7 +6,6 @@ export abstract class DefaultMongoDBRepository<
   T extends BaseModel
 > {
   constructor(private model: Model<T>) {
-    
   }
 
   async create(data: T) {
