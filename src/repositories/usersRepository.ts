@@ -1,8 +1,6 @@
 import { DefaultMongoDBRepository } from './defaultRepository';
-import mongoose from "mongoose";
 import { User } from '../models/users';
-import {  UserRepository } from './index';
-
+import { UserRepository } from '.';
 
 export class UserMongoDBRepository
   extends DefaultMongoDBRepository<User>
@@ -12,31 +10,11 @@ export class UserMongoDBRepository
     super(userModel);
   }
 
-  async findOneById(id: string): Promise<any> {
-    return await this.findOne({ _id: id });
+  async findOneById(id: string) {
+    return this.findOne({ _id: id });
   }
 
-  async findOneByEmail(email: string): Promise<any> {
+  async findOneByEmail(email: string) {
     return await this.findOne({ email });
-  }
-  
-  async create(data: User): Promise<any> {
-    return await this.create(data)
-  }
-
-  async findOne(options: any): Promise<any> {
-    return await this.findOne(options)
-  }
-
-  async find(filter: any): Promise<any> {
-    return await this.find(filter)
-  }
-
-  async deleteAll(): Promise<any> {
-    return await this.deleteAll()
-  }
-
-  async execute(): Promise<any> {
-    return await this.execute()
   }
 }
