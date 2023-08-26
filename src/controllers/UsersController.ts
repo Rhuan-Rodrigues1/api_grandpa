@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { InternalError } from "../utils/errors/userErrors";
 import { UserMongoDBRepository } from "../repositories/usersRepository";
 
 
@@ -16,7 +17,7 @@ export class Users {
     
             return res.status(200).send(user)
         } catch (err){
-            console.log(err);
+            throw new InternalError("Not found !!")           
             
         }
     }
