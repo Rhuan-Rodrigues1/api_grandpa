@@ -4,6 +4,7 @@ import cors from "cors";
 import * as database from "./database/database";
 import { router } from "./routes";
 
+
 export class SetupServer {
     private app = express()
 
