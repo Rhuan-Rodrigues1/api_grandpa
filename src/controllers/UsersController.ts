@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
-import { InternalError } from "../utils/errors/userErrors";
+import { InternalError, UserNotExist } from "../utils/errors/userErrors";
 import { UserMongoDBRepository } from "../repositories/usersRepository";
+import { AuthService } from "../services/AuthService";
 
 
 export class Users {
@@ -8,7 +9,7 @@ export class Users {
     constructor(userService: UserMongoDBRepository) {
         this.userService = userService
     }
-    async handle(req: Request, res: Response): Promise<any> {
+    public async create(req: Request, res: Response): Promise<any> {
         const {name, surname, email, password, age, cpf, address, isCareviger} = req.body
 
         try {
@@ -20,5 +21,21 @@ export class Users {
             throw new InternalError("Not found !!")           
             
         }
+    }
+
+    public async login(req: Request, res: Response) {
+        const user = await this.userService.findOneByEmail(req.body.email)
+
+        if(!user) {
+            throw new UserNotExist("User not found")
+        }
+
+        if(!(await AuthService.comparePassword(req.body.password, user.password))) {
+            throw new UserNotExist("Password does not match!")
+        }
+
+        const token = AuthService.generateToken(user.id)
+
+        res.send({ ...user, ...{token}})
     }
 }

@@ -7,5 +7,10 @@ export const router = Router()
 const usersController = new Users(new UserMongoDBRepository())
 
 router.post('/users', async (req: Request, res: Response) => {
-    await usersController.handle(req, res);
+    await usersController.create(req, res);
 });
+
+
+router.post('/login', async(req: Request, res: Response) => {
+    await usersController.login(req, res)
+})

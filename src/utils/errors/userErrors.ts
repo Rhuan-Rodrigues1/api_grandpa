@@ -45,3 +45,15 @@ export class InternalError extends Error {
         Error.captureStackTrace(this, this.constructor)
     }
 }
+
+export class UserNotExist extends Error {
+    constructor(
+        public message: string,
+        protected code: number = 401,
+        protected error: string = "User not found"
+    ) {
+        super(message)
+        this.name = this.constructor.name
+        Error.captureStackTrace(this, this.constructor)
+    }
+}
