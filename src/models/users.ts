@@ -3,19 +3,19 @@ import { AuthService } from "../services/AuthService";
 import { BaseModel } from './index'
 
 export interface User extends BaseModel {
-    name: string
-    surname: string 
-    email: string
-    password: string 
-    age: number 
-    cpf: string
-    address: string 
-    isCareviger: boolean
+    name: string;
+    surname: string; 
+    email: string;
+    password: string;
+    age: number;
+    cpf: string;
+    address: string;
+    isCareviger: boolean;
 
 }
 
 export interface ExistingUser extends User {
-  id: string
+  id: string;
 }
 
 export enum CUSTOM_VALIDATION {
@@ -65,7 +65,7 @@ schema.pre<User & Document>('save', async function (): Promise<void> {
 
   try {
     const hashdedPassword = await AuthService.hashPassword(this.password)
-    this.password = hashdedPassword
+    this.password = hashdedPassword;
   } catch (err) {
     console.log(err);
     
