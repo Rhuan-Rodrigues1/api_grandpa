@@ -2,7 +2,7 @@ import { DefaultMongoDBRepository } from './defaultRepository';
 import { Posts} from '../models/posts';
 import { PostsRepository } from '.';
 
-export class UserMongoDBRepository
+export class PostMongoDBepository
   extends DefaultMongoDBRepository<Posts>
   implements PostsRepository
 {
