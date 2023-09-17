@@ -1,4 +1,4 @@
-import { BaseRepository, FilterOptions, WithId } from '.';
+import { BaseRepository, FilterOptions, WithId } from ".";
 
 export class DatabaseError extends Error {
   constructor(message: string) {
@@ -17,9 +17,9 @@ export abstract class Repository<T> implements BaseRepository<T> {
 
   public abstract findOne(
     options: FilterOptions
-  ): Promise<WithId<T> | undefined>
+  ): Promise<WithId<T> | undefined>;
 
-  public abstract find(filter: FilterOptions): Promise<WithId<T>[]>
+  public abstract find(filter: FilterOptions): Promise<WithId<T>[]>;
 
-  public abstract deleteAll(): Promise<void>
+  public abstract deleteAll(): Promise<void>;
 }

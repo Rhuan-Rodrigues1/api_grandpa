@@ -1,13 +1,13 @@
-import { BaseModel } from '../models/index';
-import { CUSTOM_VALIDATION } from '../models/users';
-import { Error, Model } from 'mongoose';
-import { FilterOptions, WithId } from '.';
+import { BaseModel } from "../models/index";
+import { CUSTOM_VALIDATION } from "../models/users";
+import { Error, Model } from "mongoose";
+import { FilterOptions, WithId } from ".";
 import {
   DatabaseInternalError,
   DatabaseUnknownClientError,
   DatabaseValidationError,
   Repository,
-} from './repository';
+} from "./repository";
 
 export abstract class DefaultMongoDBRepository<
   T extends BaseModel
@@ -52,7 +52,7 @@ export abstract class DefaultMongoDBRepository<
     if (error instanceof Error.ValidationError) {
       const duplicatedKindErrors = Object.values(error.errors).filter(
         (err) =>
-          err.name === 'ValidatorError' &&
+          err.name === "ValidatorError" &&
           err.kind === CUSTOM_VALIDATION.DUPLICATED
       );
       if (duplicatedKindErrors.length) {
@@ -61,7 +61,7 @@ export abstract class DefaultMongoDBRepository<
       throw new DatabaseUnknownClientError(error.message);
     }
     throw new DatabaseInternalError(
-      'Something unexpected happened to the database'
+      "Something unexpected happened to the database"
     );
   }
 }

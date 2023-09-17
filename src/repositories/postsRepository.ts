@@ -1,17 +1,16 @@
-import { DefaultMongoDBRepository } from './defaultRepository';
-import { Posts} from '../models/posts';
-import { PostsRepository } from '.';
+import { DefaultMongoDBRepository } from "./defaultRepository";
+import { Posts } from "../models/posts";
+import { PostsRepository } from ".";
 
 export class PostMongoDBepository
   extends DefaultMongoDBRepository<Posts>
   implements PostsRepository
 {
-  constructor(userModel = Posts) {
-    super(userModel);
+  constructor(postModel = Posts) {
+    super(postModel);
   }
 
   async findOneById(id: string) {
     return this.findOne({ _id: id });
   }
-
 }

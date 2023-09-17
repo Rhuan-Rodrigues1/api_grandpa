@@ -1,6 +1,6 @@
-import { DefaultMongoDBRepository } from './defaultRepository';
-import { User } from '../models/users';
-import { UserRepository } from '.';
+import { DefaultMongoDBRepository } from "./defaultRepository";
+import { User } from "../models/users";
+import { UserRepository } from ".";
 
 export class UserMongoDBRepository
   extends DefaultMongoDBRepository<User>
