@@ -49,4 +49,24 @@ export class Users {
 
     res.send({ ...user, ...{ token } });
   }
+
+  public async getProfile(req: Request, res: Response) {
+    const profileId = req.context?.userId;
+
+    const findProfile = await this.userService.findOneById(profileId);
+
+    const profileData = {
+      name: findProfile.name,
+      surname: findProfile.surname,
+      email: findProfile.email,
+    };
+
+    res.status(200).send({
+      profile: profileData,
+    });
+  }
+
+  public async putProfile(req: Request, res: Response) {
+    //implement method "put" with repository in update
+  }
 }

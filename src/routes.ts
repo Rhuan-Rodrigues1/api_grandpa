@@ -25,3 +25,11 @@ router.post(
     await postController.create(req, res);
   }
 );
+
+router.get(
+  "/profile",
+  async (req: Request, res: Response, next: NextFunction) => {
+    authMiddlewares(req, res, next);
+    await usersController.getProfile(req, res);
+  }
+);
