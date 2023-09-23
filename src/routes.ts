@@ -33,3 +33,11 @@ router.get(
     await usersController.getProfile(req, res);
   }
 );
+
+router.put(
+  "/profile",
+  async (req: Request, res: Response, next: NextFunction) => {
+    authMiddlewares(req, res, next);
+    await usersController.putProfile(req, res);
+  }
+);

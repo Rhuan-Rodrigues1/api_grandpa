@@ -67,6 +67,24 @@ export class Users {
   }
 
   public async putProfile(req: Request, res: Response) {
-    //implement method "put" with repository in update
+    const profileId = req.context?.userId;
+    const { surname, age, cpf, address, isCareviger } = req.body;
+    try {
+      const data: any = {
+        surname,
+        age,
+        cpf,
+        address,
+        isCareviger,
+      };
+
+      await this.userService.update(profileId, data);
+      const userUpdated = await this.userService.findOneById(profileId);
+      res.status(200).send({
+        profile: userUpdated,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }
 }

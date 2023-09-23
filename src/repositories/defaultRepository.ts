@@ -26,6 +26,15 @@ export abstract class DefaultMongoDBRepository<
     }
   }
 
+  async update(id: T, data: T): Promise<any> {
+    try {
+      const dataModel = await this.model.findByIdAndUpdate(id, data);
+      return dataModel?.toJSON<WithId<T>>();
+    } catch (error) {
+      this.handleError(error);
+    }
+  }
+
   async findOne(options: FilterOptions): Promise<any> {
     try {
       const data = await this.model.findOne(options);
