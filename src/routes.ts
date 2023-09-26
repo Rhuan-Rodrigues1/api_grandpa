@@ -22,7 +22,7 @@ router.post(
   "/post",
   async (req: Request, res: Response, next: NextFunction) => {
     authMiddlewares(req, res, next);
-    await postController.create(req, res);
+    await postController.createPost(req, res);
   }
 );
 

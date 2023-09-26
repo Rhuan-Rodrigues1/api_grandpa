@@ -24,4 +24,5 @@ export abstract class Repository<T> implements BaseRepository<T> {
   public abstract find(filter: FilterOptions): Promise<WithId<T>[]>;
 
   public abstract deleteAll(): Promise<void>;
+  public abstract delete(id: T): Promise<void>;
 }

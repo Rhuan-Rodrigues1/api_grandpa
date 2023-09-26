@@ -7,7 +7,7 @@ export class Posts {
   constructor(postService: PostMongoDBepository) {
     this.postService = postService;
   }
-  public async create(req: Request, res: Response): Promise<any> {
+  public async createPost(req: Request, res: Response): Promise<any> {
     const data_criada = new Date();
     const hora_criada = new Date();
     const usuario = req.context?.userId;
@@ -27,5 +27,9 @@ export class Posts {
 
       throw new InternalError("Not found !!");
     }
+  }
+
+  public async deletePost(req: Request, res: Response): Promise<any> {
+    //implementar
   }
 }

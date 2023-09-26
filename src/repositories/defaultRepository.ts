@@ -57,6 +57,10 @@ export abstract class DefaultMongoDBRepository<
     await this.model.deleteMany({});
   }
 
+  async delete(id: T) {
+    await this.model.findByIdAndDelete(id);
+  }
+
   protected handleError(error: unknown): never {
     if (error instanceof Error.ValidationError) {
       const duplicatedKindErrors = Object.values(error.errors).filter(
