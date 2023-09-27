@@ -10,11 +10,11 @@ export const router = Router();
 const usersController = new Users(new UserMongoDBRepository());
 const postController = new Posts(new PostMongoDBepository());
 
-router.post("/users", async (req: Request, res: Response) => {
+router.post("/user", async (req: Request, res: Response) => {
   await usersController.create(req, res);
 });
 
-router.post("/login", async (req: Request, res: Response) => {
+router.post("/user/login", async (req: Request, res: Response) => {
   await usersController.login(req, res);
 });
 
@@ -23,6 +23,19 @@ router.post(
   async (req: Request, res: Response, next: NextFunction) => {
     authMiddlewares(req, res, next);
     await postController.createPost(req, res);
+  }
+);
+
+router.get("/post", async (req: Request, res: Response, next: NextFunction) => {
+  authMiddlewares(req, res, next);
+  await postController.showMyPosts(req, res);
+});
+
+router.delete(
+  "/post/:id",
+  async (req: Request, res: Response, next: NextFunction) => {
+    authMiddlewares(req, res, next);
+    await postController.deletePost(req, res);
   }
 );
 
