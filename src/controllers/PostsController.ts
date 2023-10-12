@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import { InternalError } from "../utils/errors/userErrors";
 import { PostMongoDBepository } from "../repositories/postsRepository";
 import {
   GetPostError,
@@ -59,6 +58,31 @@ export class Posts {
       });
     } catch (error) {
       throw new GetPostError("Error showing post", 400, error as string);
+    }
+  }
+
+  public async updatePosts(req: Request, res: Response): Promise<any> {
+    const { id } = req.params;
+    const userId = req.context?.userId;
+    const { conteudo } = req.body;
+
+    try {
+      const postsFind = await this.postService.findOneById(id);
+
+      if (userId == postsFind.usuario) {
+        await this.postService.update(id as any, conteudo);
+
+        return res.status(200).send({
+          message: "post was updated",
+          data: postsFind,
+        });
+      }
+    } catch (error) {
+      throw new UpdatePostError(
+        "error when updated post",
+        400,
+        error as string
+      );
     }
   }
 }

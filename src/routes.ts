@@ -18,6 +18,24 @@ router.post("/user/login", async (req: Request, res: Response) => {
   await usersController.login(req, res);
 });
 
+router.delete(
+  "/user",
+  async (req: Request, res: Response, next: NextFunction) => {
+    authMiddlewares(req, res, next);
+    await usersController.deleteUser(req, res);
+  }
+);
+
+router.put("/user", async (req: Request, res: Response, next: NextFunction) => {
+  authMiddlewares(req, res, next);
+  await usersController.putProfile(req, res);
+});
+
+router.get("/user", async (req: Request, res: Response, next: NextFunction) => {
+  authMiddlewares(req, res, next);
+  await usersController.getProfile(req, res);
+});
+
 router.post(
   "/post",
   async (req: Request, res: Response, next: NextFunction) => {
@@ -39,18 +57,10 @@ router.delete(
   }
 );
 
-router.get(
-  "/profile",
-  async (req: Request, res: Response, next: NextFunction) => {
-    authMiddlewares(req, res, next);
-    await usersController.getProfile(req, res);
-  }
-);
-
 router.put(
-  "/profile",
+  "/post/:id",
   async (req: Request, res: Response, next: NextFunction) => {
     authMiddlewares(req, res, next);
-    await usersController.putProfile(req, res);
+    await postController.updatePosts(req, res);
   }
 );

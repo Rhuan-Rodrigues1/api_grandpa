@@ -87,4 +87,14 @@ export class Users {
       console.log(error);
     }
   }
+
+  public async deleteUser(req: Request, res: Response): Promise<any> {
+    const profileId = req.context?.userId;
+
+    await this.userService.delete(profileId as any);
+
+    return res.status(200).send({
+      message: "Account deleted !!",
+    });
+  }
 }
